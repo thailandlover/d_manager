@@ -66,7 +66,7 @@ class CacheManager: NSObject {
     }
     
     private lazy var backgroundManager: Alamofire.SessionManager = {
-        let bundleIdentifier = "org.cocoapods.d_manager"
+        let bundleIdentifier = "org.cocoapods.d-manager"
         return Alamofire.SessionManager(configuration: URLSessionConfiguration.background(withIdentifier: bundleIdentifier + ".background"))
     }()
     
