@@ -46,7 +46,7 @@ extension String{
     }
 }
 
-class DownloadManger: NSObject {
+class CacheManager: NSObject {
     
     enum DownloadStatus: String {
         case active, failed, completed, paused, stoped
@@ -58,9 +58,9 @@ class DownloadManger: NSObject {
     private var cache = NSCache<NSString, NSData>()
     
     
-    class var shared: DownloadManger{
+    class var shared: CacheManager{
         struct Static{
-            static let instance = DownloadManger()
+            static let instance = CacheManager()
         }
         return Static.instance
     }
@@ -119,7 +119,7 @@ class DownloadManger: NSObject {
     func allItems() -> [[String: Any?]]? {
         let appDelegate = SwiftDManagerPlugin.shared!
         guard let context = SwiftDManagerPlugin.shared.getAppDelegateContext()  else { return nil}
-        let fetchRequest = NSFetchRequest<Download>(entityName: Constants.CoreData.downloadEntityName)
+        let fetchRequest = NSFetchRequest<Download>(entityName: Configs.CoreData.downloadEntityName)
         let sort = NSSortDescriptor(key: #keyPath(Download.createdAt), ascending: false)
         fetchRequest.sortDescriptors = [sort]
         var results = [[String: Any?]]()
@@ -139,7 +139,7 @@ class DownloadManger: NSObject {
     func allDownloadItems() -> [Download]?{
         let appDelegate = SwiftDManagerPlugin.shared!
         guard let context = appDelegate.getAppDelegateContext()  else { return nil}
-        let fetchRequest = NSFetchRequest<Download>(entityName: Constants.CoreData.downloadEntityName)
+        let fetchRequest = NSFetchRequest<Download>(entityName: Configs.CoreData.downloadEntityName)
         let sort = NSSortDescriptor(key: #keyPath(Download.createdAt), ascending: false)
         fetchRequest.sortDescriptors = [sort]
         var results = [Download]()
@@ -337,7 +337,7 @@ class DownloadManger: NSObject {
     func getDownloadItem(id: String) -> Download?{
         let appDelegate = SwiftDManagerPlugin.shared!
         guard let context = appDelegate.getAppDelegateContext()  else { return nil}
-        let fetchRequest = NSFetchRequest<Download>(entityName: Constants.CoreData.downloadEntityName)
+        let fetchRequest = NSFetchRequest<Download>(entityName: Configs.CoreData.downloadEntityName)
         fetchRequest.predicate = NSPredicate(format: "id = %@", id)
         do{
             return try context.fetch(fetchRequest).first

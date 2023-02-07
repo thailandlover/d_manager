@@ -13,7 +13,7 @@ A new Flutter plugin project.
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'Your Company' => 'email@example.com' }
   s.source           = { :path => '.' }
-  s.source_files = 'Classes/**/*','Classes/DownloadManager.swift','Classes/Constants.swift'
+  s.source_files = 'Classes/**/*','Classes/CacheManager.swift','Classes/Configs.swift'
   s.resources = "*.xcdatamodeld"
   s.dependency 'Flutter'
   s.dependency 'Alamofire', '4.9.1'

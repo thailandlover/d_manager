@@ -59,7 +59,7 @@ public class SwiftDManagerPlugin: NSObject, FlutterPlugin {
     }
 
     func getList(result: @escaping FlutterResult){
-        let allItems = DownloadManger.shared.allItems() ?? [[String: Any]]()
+        let allItems = CacheManager.shared.allItems() ?? [[String: Any]]()
         result(self.json(from:allItems as Any))
     }
 
@@ -74,7 +74,7 @@ public class SwiftDManagerPlugin: NSObject, FlutterPlugin {
            let fileName : String = myArgs["fileName"] as? String,
            let whereToSave : String = myArgs["savedDir"] as? String{
             if self.getActiveCount() <= 5 {
-                DownloadManger.shared.download(id: id, url: url, fileName: fileName,whereToSave: whereToSave)
+                CacheManager.shared.download(id: id, url: url, fileName: fileName,whereToSave: whereToSave)
                 result(true)
             } else {
                 result(false)
@@ -95,7 +95,7 @@ public class SwiftDManagerPlugin: NSObject, FlutterPlugin {
         if let myArgs = args as? [String: Any],
            let id : String = myArgs["id"] as? String
         {
-            DownloadManger.shared.pause(id: id)
+            CacheManager.shared.pause(id: id)
             result(true)
         } else {
             print("iOS could not extract flutter arguments in method: (pauseDownloadItem)")
@@ -111,7 +111,7 @@ public class SwiftDManagerPlugin: NSObject, FlutterPlugin {
            let id : String = myArgs["id"] as? String,
            let whereToSave : String = myArgs["savedDir"] as? String{
             if self.getActiveCount() <= 5 {
-                DownloadManger.shared.resume(id: id,whereToSave: whereToSave)
+                CacheManager.shared.resume(id: id,whereToSave: whereToSave)
                 result(true)
             } else {
                 result(false)
@@ -130,7 +130,7 @@ public class SwiftDManagerPlugin: NSObject, FlutterPlugin {
         if let myArgs = args as? [String: Any],
            let id : String = myArgs["id"] as? String
         {
-            DownloadManger.shared.stop(id: id)
+            CacheManager.shared.stop(id: id)
             result(true)
         } else {
             print("iOS could not extract flutter arguments in method: (cancelDownloadItem)")
@@ -145,7 +145,7 @@ public class SwiftDManagerPlugin: NSObject, FlutterPlugin {
         if let myArgs = args as? [String: Any],
            let id : String = myArgs["id"] as? String
         {
-            DownloadManger.shared.delete(id: id)
+            CacheManager.shared.delete(id: id)
             result(true)
         } else {
             print("iOS could not extract flutter arguments in method: (deleteDownloadItem)")
@@ -163,7 +163,7 @@ public class SwiftDManagerPlugin: NSObject, FlutterPlugin {
            let whereToSave : String = myArgs["savedDir"] as? String
         {
             if self.getActiveCount() <= 5 {
-                DownloadManger.shared.retry(id: id, whereToSave: whereToSave)
+                CacheManager.shared.retry(id: id, whereToSave: whereToSave)
                 result(true)
             } else {
                 result(false)
@@ -183,7 +183,7 @@ public class SwiftDManagerPlugin: NSObject, FlutterPlugin {
         if let myArgs = args as? [String: Any],
            let id : String = myArgs["id"] as? String
         {
-            if let download = DownloadManger.shared.getDownloadItem(id: id){
+            if let download = CacheManager.shared.getDownloadItem(id: id){
                 if let strVideoURL = download.localFile {
                     print(strVideoURL)
                     let videoURL = strVideoURL.localURL
@@ -201,7 +201,7 @@ public class SwiftDManagerPlugin: NSObject, FlutterPlugin {
         if let myArgs = args as? [String: Any],
            let id : String = myArgs["id"] as? String
         {
-            if let download = DownloadManger.shared.getDownloadItem(id: id){
+            if let download = CacheManager.shared.getDownloadItem(id: id){
                 if let strVideoURL = download.localFile {
                     print(strVideoURL)
                     let videoURL = strVideoURL.localURL
@@ -247,10 +247,10 @@ public class SwiftDManagerPlugin: NSObject, FlutterPlugin {
     }
 
     func getActiveCount() -> Int{
-        let allItems = DownloadManger.shared.allDownloadItems() ?? [Download]()
+        let allItems = CacheManager.shared.allDownloadItems() ?? [Download]()
         var activeCount = 0
         for item in allItems {
-            if item.status == DownloadManger.DownloadStatus.active.rawValue {
+            if item.status == CacheManager.DownloadStatus.active.rawValue {
                 activeCount = activeCount + 1
             }
         }
@@ -270,33 +270,33 @@ public class SwiftDManagerPlugin: NSObject, FlutterPlugin {
     }
 
     public func initConfigurations(){
-        DownloadManger.shared.setupDownloadQueue()
-        let allItems = DownloadManger.shared.allDownloadItems() ?? [Download]()
+        CacheManager.shared.setupDownloadQueue()
+        let allItems = CacheManager.shared.allDownloadItems() ?? [Download]()
         for item in allItems {
-            if item.status == DownloadManger.DownloadStatus.active.rawValue {
+            if item.status == CacheManager.DownloadStatus.active.rawValue {
                 guard let itemId = item.id else {
                     continue
                 }
-                DownloadManger.shared.pause(id: itemId)
+                CacheManager.shared.pause(id: itemId)
             }
 
             if item.status == nil {
                 guard let itemId = item.id else {
                     continue
                 }
-                DownloadManger.shared.pause(id: itemId)       
+                CacheManager.shared.pause(id: itemId)       
             }
         }
     }
 
     public func applicationWillTerminate() {
-      let allItems = DownloadManger.shared.allDownloadItems() ?? [Download]()
+      let allItems = CacheManager.shared.allDownloadItems() ?? [Download]()
       for item in allItems {
-          if item.status == DownloadManger.DownloadStatus.active.rawValue {
+          if item.status == CacheManager.DownloadStatus.active.rawValue {
               guard let itemId = item.id else {
                   continue
               }
-              DownloadManger.shared.pause(id: itemId)
+              CacheManager.shared.pause(id: itemId)
           }
       }
     }
