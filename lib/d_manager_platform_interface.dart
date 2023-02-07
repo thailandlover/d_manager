@@ -23,7 +23,39 @@ abstract class DManagerPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<String?> getPlatformVersion() {
-    throw UnimplementedError('platformVersion() has not been implemented.');
+  Future<dynamic> getList() {
+    throw UnimplementedError('getList() has not been implemented.');
+  }
+
+  Future<dynamic> start(Map<String, dynamic> data) {
+    throw UnimplementedError('start() has not been implemented.');
+  }
+
+  Future<dynamic> pause(Map<String, dynamic> data) {
+    throw UnimplementedError('pause() has not been implemented.');
+  }
+
+  Future<dynamic> resume(Map<String, dynamic> data) {
+    throw UnimplementedError('resume() has not been implemented.');
+  }
+
+  Future<dynamic> cancel(Map<String, dynamic> data) {
+    throw UnimplementedError('cancel() has not been implemented.');
+  }
+
+  Future<dynamic> delete(Map<String, dynamic> data) {
+    throw UnimplementedError('delete() has not been implemented.');
+  }
+
+  Future<dynamic> retry(Map<String, dynamic> data) {
+    throw UnimplementedError('retry() has not been implemented.');
+  }
+
+  Future<dynamic> deleteLocal(Map<String, dynamic> data) {
+    throw UnimplementedError('deleteLocal() has not been implemented.');
+  }
+
+  Future<dynamic> openFile(Map<String, dynamic> data) {
+    throw UnimplementedError('openFile() has not been implemented.');
   }
 }
