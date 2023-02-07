@@ -1,0 +1,29 @@
+PODS:
+  - Alamofire (4.9.1)
+  - d_manager (0.0.1):
+    - Alamofire (= 4.9.1)
+    - Flutter
+  - Flutter (1.0.0)
+
+DEPENDENCIES:
+  - d_manager (from `.symlinks/plugins/d_manager/ios`)
+  - Flutter (from `Flutter`)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+
+EXTERNAL SOURCES:
+  d_manager:
+    :path: ".symlinks/plugins/d_manager/ios"
+  Flutter:
+    :path: Flutter
+
+SPEC CHECKSUMS:
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  d_manager: f30290ac066826b885fb4c6e68e54e14d4df202e
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+
+PODFILE CHECKSUM: ef19549a9bc3046e7bb7d2fab4d021637c0c58a3
+
+COCOAPODS: 1.11.3
