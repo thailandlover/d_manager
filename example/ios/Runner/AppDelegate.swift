@@ -12,12 +12,12 @@ import d_manager
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
     GeneratedPluginRegistrant.register(with: self)
-    SwiftDManagerPlugin.shared.initConfigurations()
+    SwiftDManagerPlugin.shared.initiate()
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 
   override func applicationWillTerminate(_ application: UIApplication) {
-      SwiftDManagerPlugin.shared.applicationWillTerminate()
+      SwiftDManagerPlugin.shared.clearAll()
   }
 
     lazy var managedObjectModel: NSManagedObjectModel = {

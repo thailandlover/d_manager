@@ -269,7 +269,7 @@ public class SwiftDManagerPlugin: NSObject, FlutterPlugin {
         return false
     }
 
-    public func initConfigurations(){
+    public func initiate(){
         CacheManager.shared.setupDownloadQueue()
         let allItems = CacheManager.shared.allDownloadItems() ?? [Download]()
         for item in allItems {
@@ -289,7 +289,7 @@ public class SwiftDManagerPlugin: NSObject, FlutterPlugin {
         }
     }
 
-    public func applicationWillTerminate() {
+    public func clearAll() {
       let allItems = CacheManager.shared.allDownloadItems() ?? [Download]()
       for item in allItems {
           if item.status == CacheManager.DownloadStatus.active.rawValue {
