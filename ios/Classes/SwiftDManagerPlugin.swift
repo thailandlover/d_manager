@@ -17,7 +17,7 @@ public class SwiftDManagerPlugin: NSObject, FlutterPlugin {
 
     public func getAppDelegateContext() -> NSManagedObjectContext?{
         let appDelegate = UIApplication.shared.delegate as? SwiftDManagerPluginDelegate
-        return appDelegate?.getContext()
+        return appDelegate?.getAppManager().getPersistentContainer().viewContext
     }
 
 
@@ -303,5 +303,10 @@ public class SwiftDManagerPlugin: NSObject, FlutterPlugin {
 }
 
 public protocol SwiftDManagerPluginDelegate {
-    func getContext()-> NSManagedObjectContext?
+    //func getContext()-> NSManagedObjectContext?
+    func getAppManager() -> AppManagerDelegate
+}
+
+public protocol AppManagerDelegate {
+    func getPersistentContainer() -> NSPersistentContainer
 }
