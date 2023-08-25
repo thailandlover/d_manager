@@ -289,7 +289,7 @@ public class SwiftDManagerPlugin: NSObject, FlutterPlugin {
         }
     }
 
-    public func clearAll() {
+    public func PausActiveDownloading() {
       let allItems = CacheManager.shared.allDownloadItems() ?? [Download]()
       for item in allItems {
           if item.status == CacheManager.DownloadStatus.active.rawValue {
